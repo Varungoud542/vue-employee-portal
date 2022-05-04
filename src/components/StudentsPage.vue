@@ -40,7 +40,7 @@ export default {
   },
   created() {
     this.clickedStudentDetails = Object.assign({},this.clickedStudentDetails)
-    console.log( this.clickedStudentDetails)
+    console.log(this.clickedStudentDetails)
   },
 };
 </script>

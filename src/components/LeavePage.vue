@@ -11,7 +11,7 @@ export default {
   created() {
     this.employeesDetails = JSON.parse(localStorage.getItem("employees"));
     this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (this.currentUser.role === "member") {
+    if (this.currentUser.role === "user") {
       this.employeesDetails = this.employeesDetails.filter(
         (emp) => emp.id == this.currentUser.id
       );
