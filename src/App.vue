@@ -1,0 +1,15 @@
+<script>
+import HeaderPage from "./components/HeaderPage.vue";
+export default {
+  name: "App",
+  components: {
+    HeaderPage,
+  },
+};
+</script>
+<template>
+  <div id="app">
+    <HeaderPage></HeaderPage>
+    <router-view></router-view>
+  </div>
+</template>
