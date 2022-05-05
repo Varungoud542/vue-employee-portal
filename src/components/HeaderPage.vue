@@ -1,39 +1,45 @@
 <template>
-  <div class="Header-bar">
-    <span @click="logout()">Logout</span>
-    <span @click="goToleave()">Leave</span>
-    <span @click="goTohome()">Home</span>
-    <span @click="goToStudents()">Students</span>
-  </div>
+  <v-app-bar v-if="$route.meta.page > -1" color="blue" elevation="4">
+    <div class="heade-list">
+      <div class="header-item" @click="goTohome()">Home</div>
+      <div class="header-item" @click="goToStudents()">Students</div>
+      <div class="header-item" @click="goToleave()">Leave</div>
+    </div>
+    <div class="header-item" @click="logout()">Logout</div>
+  </v-app-bar>
 </template>
 <script>
 export default {
-  name: "HeaderPage",
+  name: 'HeaderPage',
   methods: {
-    logout() {
-      localStorage.removeItem("currentUser");
-      this.$router.push("LoginPage");
-      localStorage.removeItem("upDatedUser");
+    logout () {
+      localStorage.removeItem('currentUser')
+      this.$router.push('LoginPage')
+      localStorage.removeItem('upDatedUser')
     },
-    goToleave() {
-      this.$router.push("LeavePage");
+    goToleave () {
+      this.$router.push('LeavePage')
     },
-    goTohome(){
-        this.$router.push("/HomePage")
+    goTohome () {
+      this.$router.push('/HomePage')
     },
-    goToStudents(){
-        this.$router.push("StudentsPage")
+    goToStudents () {
+      this.$router.push('StudentsPage')
     }
-  },
-};
+  }
+}
 </script>
 <style>
-.Header-bar {
-  background-color: black;
+.header-item {
+  margin-left: 20px;
+  cursor: pointer;
 }
-span {
+.v-toolbar__content {
+  display: flex;
+  justify-content: space-between;
   color: white;
-  margin-left: 65px;
-  margin-right: 65px;
+}
+.heade-list {
+  display: flex;
 }
 </style>

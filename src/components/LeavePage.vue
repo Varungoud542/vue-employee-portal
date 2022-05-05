@@ -1,29 +1,29 @@
 <script>
 // import Vue from "vue";
 export default {
-  name: "LeavePage",
-  data() {
+  name: 'LeavePage',
+  data () {
     return {
       employeesDetails: [],
-      currentUser: {},
-    };
+      currentUser: {}
+    }
   },
-  created() {
-    this.employeesDetails = JSON.parse(localStorage.getItem("employees"));
-    this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (this.currentUser.role === "user") {
+  created () {
+    this.employeesDetails = JSON.parse(localStorage.getItem('employees'))
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    if (this.currentUser.role === 'user') {
       this.employeesDetails = this.employeesDetails.filter(
-        (emp) => emp.id == this.currentUser.id
-      );
+        emp => emp.id == this.currentUser.id
+      )
     }
   },
   methods: {
-    approvedOrRejected(employee, updatedStatus) {
-      employee.status = updatedStatus;
-      localStorage.setItem("employees", JSON.stringify(this.employeesDetails));
-    },
-  },
-};
+    approvedOrRejected (employee, updatedStatus) {
+      employee.status = updatedStatus
+      localStorage.setItem('employees', JSON.stringify(this.employeesDetails))
+    }
+  }
+}
 </script>
 <template>
   <div>
@@ -55,24 +55,32 @@ export default {
             employeeDetails.status == 'Pending' && currentUser.role == 'admin'
           "
         >
-          <button
+          <v-btn
+            class="custom-btn"
+            color="primary"
             @click="approvedOrRejected(employeeDetails, 'Approved', index)"
-          >
-            Approve
-          </button>
+            >Approve
+          </v-btn>
         </td>
         <td
           v-if="
             employeeDetails.status == 'Pending' && currentUser.role == 'admin'
           "
         >
-          <button
+          <v-btn
+            class="custom-btn"
+            color="error"
             @click="approvedOrRejected(employeeDetails, 'Rejected', index)"
           >
             Reject
-          </button>
+          </v-btn>
         </td>
       </tr>
     </table>
   </div>
 </template>
+<style>
+.custom-btn {
+  width: 100px;
+}
+</style>

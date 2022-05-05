@@ -1,48 +1,52 @@
 <script>
 export default {
-  name: "StudentsPage",
-  data() {
+  name: 'StudentsPage',
+  data () {
     return {
+      activeStudentIndex: -1,
+      activeStudent: {},
       students: [
         {
-          name: "sucharitha",
+          name: 'sucharitha',
           class: 10,
-          age: 20,
+          age: 20
         },
         {
-          name: "varun",
+          name: 'varun',
           class: 11,
-          age: 21,
+          age: 21
         },
         {
-          name: "tinku",
+          name: 'tinku',
           class: 12,
-          age: 22,
+          age: 22
         },
         {
-          name: "kanny",
+          name: 'kanny',
           class: 13,
-          age: 24,
-        },
+          age: 24
+        }
       ],
-      isConditionTrue: false,
-      clickedStudentDetails:{},
-    };
+      isEdited: false
+    }
   },
   methods: {
-    editStudent() {
-      this.isConditionTrue = true;
+    editStudent (data, i) {
+      this.isEdited = true
+      this.activeStudent = JSON.parse(JSON.stringify(data))
+      this.activeStudentIndex = i
     },
-    submitDetails() {},
-    deleteStudent(i) {
-      this.students.splice(i, 1);
+    submitDetails () {
+      this.$set(this.students, this.activeStudentIndex, this.activeStudent)
+      this.activeStudent = {}
+      this.activeStudentIndex = -1
+      this.isEdited = false
     },
-  },
-  created() {
-    this.clickedStudentDetails = Object.assign({},this.clickedStudentDetails)
-    console.log(this.clickedStudentDetails)
-  },
-};
+    deleteStudent (i) {
+      this.students.splice(i, 1)
+    }
+  }
+}
 </script>
 <template>
   <div>
@@ -57,16 +61,37 @@ export default {
           <td>{{ student.name }}</td>
           <td>{{ student.class }}</td>
           <td>{{ student.age }}</td>
-          <button @click="editStudent(student)">Edit</button>
-          <button @click="deleteStudent(index)">Delete</button>
+
+          <v-btn
+            @click="editStudent(student, index)"
+            class="edit-btn"
+            color="blue"
+            >edit</v-btn
+          >
+          <v-btn @click="deleteStudent(student)" color="error">delete</v-btn>
         </tr>
       </table>
     </div>
-    <div v-if="isConditionTrue == true">
-      <input v-model="clickedStudentDetails.name" />
-      <input v-model="clickedStudentDetails.class" />
-      <input v-model="clickedStudentDetails.age" />
-      <button click="submitDetails()">submit</button>
-    </div>
+    <v-row v-if="isEdited" justify="center">
+      <v-col cols="12" md="4">
+        <v-form ref="form" class="login-form">
+          <v-text-field
+            v-model="activeStudent.name"
+            label="User Name"
+          ></v-text-field>
+          <v-text-field
+            v-model="activeStudent.class"
+            label="class"
+          ></v-text-field>
+          <v-text-field v-model="activeStudent.age" label="age"></v-text-field>
+          <v-btn @click="submitDetails()" color="primary">Submit</v-btn>
+        </v-form>
+      </v-col>
+    </v-row>
   </div>
 </template>
+<style>
+.edit-btn {
+  color: white !important;
+}
+</style>
