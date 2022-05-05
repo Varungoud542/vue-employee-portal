@@ -59,7 +59,7 @@ export default {
         </button>
       </div>
       <div class="interviewerDetails">
-        <table v-if="this.isPositionsActive == true">
+        <table v-if="isPositionsActive">
           <tr>
             <th>POSITION</th>
             <th>NAME</th>
@@ -71,7 +71,7 @@ export default {
         </table>
       </div>
       <div class="interviewerDetails">
-        <table v-if="this.isPositionsActive == false">
+        <table v-if="!isPositionsActive">
           <tr>
             <th>POSITION</th>
             <th>NAME</th>

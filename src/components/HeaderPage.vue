@@ -19,7 +19,7 @@ export default {
       this.$router.push("LeavePage");
     },
     goTohome(){
-        this.$router.push("HomePage")
+        this.$router.push("/HomePage")
     },
     goToStudents(){
         this.$router.push("StudentsPage")

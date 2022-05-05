@@ -10,32 +10,26 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "LoginPage",
     component: LoginPage,
   },
   {
     path: "/shareData",
-    name: "ShareData",
     component: ShareData,
   },
   {
     path: "/LoginPage",
-    name: "LoginPage",
     component: LoginPage,
   },
   {
     path: "/HomePage",
-    name: "HomePage",
     component: HomePage,
   },
   {
     path: "/LeavePage",
-    name: "LeavePage",
     component: LeavePage,
   },
   {
     path:"/StudentsPage",
-    nme:"StudentsPage",
     component:StudentsPage,
   }
 ];

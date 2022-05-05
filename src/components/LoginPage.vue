@@ -1,5 +1,6 @@
 <script>
 export default {
+ 
   name: "LoginPage",
   data() {
     return {
@@ -103,11 +104,9 @@ export default {
 </script>
 <template>
   <div>
-    <h1>{{ name }}</h1>
-    <h1>{{ password }}</h1>
     <input placeholder="name" v-model="name" />
     <input placeholder="password" v-model="password" />
     <input placeholder="ID" v-model="id" />
-    <button @click="login()">submit</button>
+    <v-btn elevation="16" @click="login()"></v-btn>
   </div>
 </template>
