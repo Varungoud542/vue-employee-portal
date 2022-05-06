@@ -61,33 +61,41 @@ export default {
           <td>{{ student.name }}</td>
           <td>{{ student.class }}</td>
           <td>{{ student.age }}</td>
-
-          <v-btn
-            @click="editStudent(student, index)"
-            class="edit-btn"
-            color="blue"
-            >edit</v-btn
-          >
-          <v-btn @click="deleteStudent(student)" color="error">delete</v-btn>
+          <td>
+            <v-icon @click="editStudent(student, index)">
+              mdi-pencil
+            </v-icon>
+            <v-icon @click="deleteStudent(student)">
+              mdi-delete
+            </v-icon>
+          </td>
         </tr>
       </table>
     </div>
-    <v-row v-if="isEdited" justify="center">
-      <v-col cols="12" md="4">
-        <v-form ref="form" class="login-form">
-          <v-text-field
-            v-model="activeStudent.name"
-            label="User Name"
-          ></v-text-field>
-          <v-text-field
-            v-model="activeStudent.class"
-            label="class"
-          ></v-text-field>
-          <v-text-field v-model="activeStudent.age" label="age"></v-text-field>
-          <v-btn @click="submitDetails()" color="primary">Submit</v-btn>
-        </v-form>
-      </v-col>
-    </v-row>
+    <v-dialog v-model="isEdited" max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">Edit Student</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-text-field
+              v-model="activeStudent.name"
+              label="User Name"
+            ></v-text-field>
+            <v-text-field
+              v-model="activeStudent.class"
+              label="class"
+            ></v-text-field>
+            <v-text-field
+              v-model="activeStudent.age"
+              label="age"
+            ></v-text-field>
+            <v-btn @click="submitDetails()" color="primary">Submit</v-btn>
+          </v-container>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <style>
