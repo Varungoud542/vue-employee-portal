@@ -2,7 +2,7 @@
   <div>
     <v-app>
       <v-main>
-        <HeaderPage />
+        <HeaderPage v-if="$route.meta.showHeader !== -1" />
         <router-view />
       </v-main>
     </v-app>

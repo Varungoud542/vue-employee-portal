@@ -1,7 +1,9 @@
 <template>
-  <v-app-bar v-if="$route.meta.page > -1" color="blue" elevation="4">
+  <v-app-bar color="blue" elevation="4">
     <div class="heade-list">
-      <div class="header-item" @click="goTohome()">Home</div>
+      <div class="header-item" @click="goTohome()">
+        Home
+      </div>
       <div class="header-item" @click="goToStudents()">Students</div>
       <div class="header-item" @click="goToleave()">Leave</div>
     </div>

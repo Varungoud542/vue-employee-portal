@@ -11,41 +11,32 @@ const routes = [
   {
     path: "/",
     component: LoginPage,
+    meta: {
+      showHeader: -1,
+    },
   },
   {
     path: "/shareData",
     component: ShareData,
-    meta: {
-      page: 1,
-    },
   },
   {
     path: "/LoginPage",
     component: LoginPage,
     meta: {
-      page: -1,
+      showHeader: -1,
     },
   },
   {
     path: "/HomePage",
     component: HomePage,
-    meta: {
-      page: 3,
-    },
   },
   {
     path: "/LeavePage",
     component: LeavePage,
-    meta: {
-      page: 4,
-    },
   },
   {
     path: "/StudentsPage",
     component: StudentsPage,
-    meta: {
-      page: 5,
-    },
   },
 ];
 
