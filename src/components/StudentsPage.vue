@@ -50,28 +50,6 @@ export default {
 </script>
 <template>
   <div>
-    <div>
-      <table>
-        <tr>
-          <th>NAME</th>
-          <th>CLASS</th>
-          <th>AGE</th>
-        </tr>
-        <tr v-for="(student, index) in students" :key="student.class">
-          <td>{{ student.name }}</td>
-          <td>{{ student.class }}</td>
-          <td>{{ student.age }}</td>
-          <td>
-            <v-icon @click="editStudent(student, index)">
-              mdi-pencil
-            </v-icon>
-            <v-icon @click="deleteStudent(student)">
-              mdi-delete
-            </v-icon>
-          </td>
-        </tr>
-      </table>
-    </div>
     <v-dialog v-model="isEdited" max-width="600px">
       <v-card>
         <v-card-title>
@@ -96,10 +74,40 @@ export default {
         </v-card-text>
       </v-card>
     </v-dialog>
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>CLASS</th>
+            <th>AGE</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(student, index) in students" :key="student.class">
+            <td>{{ student.name }}</td>
+            <td>{{ student.class }}</td>
+            <td>{{ student.age }}</td>
+            <td>
+              <v-icon @click="editStudent(student, index)">
+                mdi-pencil
+              </v-icon>
+              <v-icon @click="deleteStudent(index)">
+                mdi-delete
+              </v-icon>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
   </div>
 </template>
 <style>
 .edit-btn {
   color: white !important;
+}
+tbody {
+  text-align: left;
 }
 </style>

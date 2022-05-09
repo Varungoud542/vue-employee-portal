@@ -27,60 +27,67 @@ export default {
 </script>
 <template>
   <div>
-    <table>
-      <tr>
-        <th>NAME</th>
-        <th>AGE</th>
-        <th>POSITION</th>
-        <th>leaveDuration</th>
-        <th>LEAVETYPE</th>
-        <th>ROLE</th>
-        <th>ID</th>
-        <th>STATUS</th>
-      </tr>
-      <tr
-        v-for="(employeeDetails, index) in employeesDetails"
-        :key="employeeDetails.id"
-      >
-        <td>{{ employeeDetails.name }}</td>
-        <td>{{ employeeDetails.age }}</td>
-        <td>{{ employeeDetails.position }}</td>
-        <td>{{ employeeDetails.leaveDuration }}</td>
-        <td>{{ employeeDetails.leaveType }}</td>
-        <td>{{ employeeDetails.role }}</td>
-        <td>{{ employeeDetails.id }}</td>
-        <td>{{ employeeDetails.status }}</td>
-        <td
-          v-if="
-            employeeDetails.status == 'Pending' && currentUser.role == 'admin'
-          "
+    <v-simple-table>
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>AGE</th>
+          <th>POSITION</th>
+          <th>LEAVEDURATION</th>
+          <th>LEAVETYPE</th>
+          <th>ROLE</th>
+          <th>ID</th>
+          <th>STATUS</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="(employeeDetails, index) in employeesDetails"
+          :key="employeeDetails.id"
         >
-          <v-btn
-            class="custom-btn"
-            color="primary"
-            @click="approvedOrRejected(employeeDetails, 'Approved', index)"
-            >Approve
-          </v-btn>
-        </td>
-        <td
-          v-if="
-            employeeDetails.status == 'Pending' && currentUser.role == 'admin'
-          "
-        >
-          <v-btn
-            class="custom-btn"
-            color="error"
-            @click="approvedOrRejected(employeeDetails, 'Rejected', index)"
+          <td>{{ employeeDetails.name }}</td>
+          <td>{{ employeeDetails.age }}</td>
+          <td>{{ employeeDetails.position }}</td>
+          <td>{{ employeeDetails.leaveDuration }}</td>
+          <td>{{ employeeDetails.leaveType }}</td>
+          <td>{{ employeeDetails.role }}</td>
+          <td>{{ employeeDetails.id }}</td>
+          <td>{{ employeeDetails.status }}</td>
+          <td
+            v-if="
+              employeeDetails.status == 'Pending' && currentUser.role == 'admin'
+            "
           >
-            Reject
-          </v-btn>
-        </td>
-      </tr>
-    </table>
+            <v-btn
+              class="custom-btn"
+              color="primary"
+              @click="approvedOrRejected(employeeDetails, 'Approved', index)"
+              v-if="
+                employeeDetails.status == 'Pending' &&
+                  currentUser.role == 'admin'
+              "
+            >
+              Approve
+            </v-btn>
+            <v-btn
+              class="custom-btn"
+              color="error"
+              @click="approvedOrRejected(employeeDetails, 'Rejected', index)"
+            >
+              Reject
+            </v-btn>
+          </td>
+        </tr>
+      </tbody>
+    </v-simple-table>
   </div>
 </template>
 <style>
 .custom-btn {
   width: 100px;
+}
+tbody {
+  text-align: left;
 }
 </style>
