@@ -27,6 +27,9 @@ export default {
           age: 24
         }
       ],
+      nameRules: [v => !!v || 'Name is required'],
+      classRules: [v => !!v || 'class is required'],
+      ageRules: [v => !!v || 'age is required'],
       isEdited: false
     }
   },
@@ -60,16 +63,24 @@ export default {
             <v-text-field
               v-model="activeStudent.name"
               label="User Name"
+              :rules="nameRules"
             ></v-text-field>
             <v-text-field
               v-model="activeStudent.class"
               label="class"
+              :rules="classRules"
             ></v-text-field>
             <v-text-field
               v-model="activeStudent.age"
               label="age"
+              :rules="ageRules"
             ></v-text-field>
-            <v-btn @click="submitDetails()" color="primary">Submit</v-btn>
+            <v-btn
+              :disabled="!activeStudent.name || !activeStudent.class|| !activeStudent.age"
+              @click="submitDetails()"
+              color="primary"
+              >Submit</v-btn
+            >
           </v-container>
         </v-card-text>
       </v-card>
