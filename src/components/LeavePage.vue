@@ -4,6 +4,18 @@ export default {
   name: 'LeavePage',
   data () {
     return {
+      search: '',
+      headers: [
+        { text: 'NAME', value: 'name' },
+        { text: 'AGE', value: 'age' },
+        { text: 'POSITION', value: 'position' },
+        { text: 'LEAVEDURATION', value: 'leaveDuration' },
+        { text: 'LEAVETYPE', value: 'leaveType' },
+        { text: 'Role', value: 'role' },
+        { text: 'ID', value: 'id' },
+        { text: 'STATUS', value: 'status' },
+        { text: 'ACTIONS', value: 'actions' }
+      ],
       employeesDetails: [],
       currentUser: {}
     }
@@ -21,66 +33,58 @@ export default {
     approvedOrRejected (employee, updatedStatus) {
       employee.status = updatedStatus
       localStorage.setItem('employees', JSON.stringify(this.employeesDetails))
+    },
+    filterOnlyCapsText (value, search) {
+      console.log(value)
+      return (
+        value != null &&
+        search != null &&
+        typeof value === 'string' &&
+        value
+          .toString()
+          .toLocaleLowerCase()
+          .indexOf(search) !== -1
+      )
     }
   }
 }
 </script>
 <template>
   <div>
-    <v-simple-table>
-      <thead>
-        <tr>
-          <th>NAME</th>
-          <th>AGE</th>
-          <th>POSITION</th>
-          <th>LEAVEDURATION</th>
-          <th>LEAVETYPE</th>
-          <th>ROLE</th>
-          <th>ID</th>
-          <th>STATUS</th>
-          <th>ACTIONS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(employeeDetails, index) in employeesDetails"
-          :key="employeeDetails.id"
+    <v-data-table
+      :headers="headers"
+      :items="employeesDetails"
+      :items-per-page="3"
+      class="elevation-1"
+      :search="search"
+      :custom-filter="filterOnlyCapsText"
+    >
+      <template v-slot:top>
+        <v-text-field
+          v-model="search"
+          label="Search (LOWER CASE ONLY)"
+          class="mx-4"
+        ></v-text-field>
+      </template>
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-btn
+          class="custom-btn"
+          color="primary"
+          @click="approvedOrRejected(item, 'Approved')"
+          v-if="item.status == 'Pending' && currentUser.role == 'admin'"
         >
-          <td>{{ employeeDetails.name }}</td>
-          <td>{{ employeeDetails.age }}</td>
-          <td>{{ employeeDetails.position }}</td>
-          <td>{{ employeeDetails.leaveDuration }}</td>
-          <td>{{ employeeDetails.leaveType }}</td>
-          <td>{{ employeeDetails.role }}</td>
-          <td>{{ employeeDetails.id }}</td>
-          <td>{{ employeeDetails.status }}</td>
-          <td
-            v-if="
-              employeeDetails.status == 'Pending' && currentUser.role == 'admin'
-            "
-          >
-            <v-btn
-              class="custom-btn"
-              color="primary"
-              @click="approvedOrRejected(employeeDetails, 'Approved', index)"
-              v-if="
-                employeeDetails.status == 'Pending' &&
-                  currentUser.role == 'admin'
-              "
-            >
-              Approve
-            </v-btn>
-            <v-btn
-              class="custom-btn"
-              color="error"
-              @click="approvedOrRejected(employeeDetails, 'Rejected', index)"
-            >
-              Reject
-            </v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </v-simple-table>
+          Approve
+        </v-btn>
+        <v-btn
+          class="custom-btn"
+          color="error"
+          @click="approvedOrRejected(item, 'Rejected')"
+          v-if="item.status == 'Pending' && currentUser.role == 'admin'"
+        >
+          Reject
+        </v-btn>
+      </template>
+    </v-data-table>
   </div>
 </template>
 <style>

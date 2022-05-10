@@ -28,8 +28,14 @@ export default {
         }
       ],
       nameRules: [v => !!v || 'Name is required'],
-      classRules: [v => !!v || 'class is required'],
-      ageRules: [v => !!v || 'age is required'],
+      classRules: [
+        v => !!v || 'class is required',
+        v => (v > 1 && v <= 20) || 'class should be between 1 and 20'
+      ],
+      ageRules: [
+        v => !!v || 'age is required',
+        v => (v > 3 && v <= 60) || 'Age should be between 3 and 60'
+      ],
       isEdited: false
     }
   },
@@ -76,7 +82,11 @@ export default {
               :rules="ageRules"
             ></v-text-field>
             <v-btn
-              :disabled="!activeStudent.name || !activeStudent.class|| !activeStudent.age"
+              :disabled="
+                !activeStudent.name ||
+                  !activeStudent.class ||
+                  !activeStudent.age
+              "
               @click="submitDetails()"
               color="primary"
               >Submit</v-btn
