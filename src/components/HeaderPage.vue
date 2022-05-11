@@ -6,6 +6,7 @@
       </div>
       <div class="header-item" @click="goToStudents()">Students</div>
       <div class="header-item" @click="goToleave()">Leave</div>
+      <div class="header-item" @click="goToemployee()">employees </div>
     </div>
     <div class="header-item" @click="logout()">Logout</div>
   </v-app-bar>
@@ -27,6 +28,9 @@ export default {
     },
     goToStudents () {
       this.$router.push('StudentsPage')
+    },
+    goToemployee(){
+      this.$router.push('employee')
     }
   }
 }

@@ -5,6 +5,7 @@ import ShareData from "../components/ShareData.vue";
 import HomePage from "../components/HomePage.vue";
 import LeavePage from "../components/LeavePage.vue";
 import StudentsPage from "../components/StudentsPage.vue";
+import EmployeePage from "../components/EmployeePage.vue"
 Vue.use(VueRouter);
 
 const routes = [
@@ -38,6 +39,10 @@ const routes = [
     path: "/StudentsPage",
     component: StudentsPage,
   },
+  {
+    path:'/employee',
+    component:EmployeePage
+  }
 ];
 
 const router = new VueRouter({
