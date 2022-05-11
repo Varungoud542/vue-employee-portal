@@ -34,18 +34,6 @@ export default {
       employee.status = updatedStatus
       localStorage.setItem('employees', JSON.stringify(this.employeesDetails))
     },
-    filterOnlyCapsText (value, search) {
-      console.log(value)
-      return (
-        value != null &&
-        search != null &&
-        typeof value === 'string' &&
-        value
-          .toString()
-          .toLocaleLowerCase()
-          .indexOf(search) !== -1
-      )
-    }
   }
 }
 </script>
@@ -55,15 +43,12 @@ export default {
       :headers="headers"
       :items="employeesDetails"
       :items-per-page="3"
-      class="elevation-1"
       :search="search"
-      :custom-filter="filterOnlyCapsText"
     >
       <template v-slot:top>
         <v-text-field
           v-model="search"
-          label="Search (LOWER CASE ONLY)"
-          class="mx-4"
+          label="Search "
         ></v-text-field>
       </template>
       <template v-slot:[`item.actions`]="{ item }">

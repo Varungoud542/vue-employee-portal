@@ -134,5 +134,6 @@ export default {
 <style>
 .login-form {
   margin: 20px;
+  margin-top: 150px;
 }
 </style>

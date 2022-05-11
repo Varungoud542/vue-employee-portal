@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="blue" elevation="4">
+  <v-app-bar color="blue" >
     <div class="heade-list">
       <div class="header-item" @click="goTohome()">
         Home
@@ -31,7 +31,10 @@ export default {
     },
     goToemployee(){
       this.$router.push('employee')
-    }
+    },
+    //  goToEmployeeData(){
+    //   this.$router.push('EmployeeData')
+    // }
   }
 }
 </script>
