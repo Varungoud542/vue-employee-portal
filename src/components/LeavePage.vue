@@ -17,7 +17,10 @@ export default {
         { text: 'ACTIONS', value: 'actions' }
       ],
       employeesDetails: [],
-      currentUser: {}
+      currentUser: {},
+      showPopup: false,
+      activeEmp: {},
+      employeeDetalis: -1
     }
   },
   created () {
@@ -31,9 +34,19 @@ export default {
   },
   methods: {
     approvedOrRejected (employee, updatedStatus) {
-      employee.status = updatedStatus
-      localStorage.setItem('employees', JSON.stringify(this.employeesDetails))
+      this.activeEmp = employee
+      if (updatedStatus === 'Rejected') {
+        this.showPopup = true
+      } else {
+        employee.status = updatedStatus
+        localStorage.setItem('employees', JSON.stringify(this.employeesDetails))
+      }
     },
+    confirmReject () {
+      this.activeEmp.status = 'Rejected'
+      this.showPopup = false
+      localStorage.setItem('employees', JSON.stringify(this.employeesDetails))
+    }
   }
 }
 </script>
@@ -46,10 +59,7 @@ export default {
       :search="search"
     >
       <template v-slot:top>
-        <v-text-field
-          v-model="search"
-          label="Search "
-        ></v-text-field>
+        <v-text-field v-model="search" label="Search "></v-text-field>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-btn
@@ -70,6 +80,26 @@ export default {
         </v-btn>
       </template>
     </v-data-table>
+    <div>
+      <v-dialog v-model="showPopup" max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">Edit Student</span>
+          </v-card-title>
+          <v-card-text>
+            Do you want to reject this employee leave?
+            <v-container>
+              <v-btn @click="showPopup = false">
+                CANCEL
+              </v-btn>
+              <v-btn class="ma-1" color="error" plain @click="confirmReject()"
+                >Reject</v-btn
+              >
+            </v-container>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+    </div>
   </div>
 </template>
 <style>
